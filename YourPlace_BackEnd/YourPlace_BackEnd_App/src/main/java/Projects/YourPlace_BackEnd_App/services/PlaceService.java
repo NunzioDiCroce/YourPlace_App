@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import Projects.YourPlace_BackEnd_App.entities.Place;
@@ -28,9 +30,8 @@ public class PlaceService {
 	}
 
 	// - - - - - - getPlaces - - - - - -
-	public Page<Place> getPlaces() {
-		return null;
-
+	public Page<Place> getPlaces(int page, int size, String sort) {
+		return placeRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
 	}
 
 	// - - - - - - findPlace - - - - - -
