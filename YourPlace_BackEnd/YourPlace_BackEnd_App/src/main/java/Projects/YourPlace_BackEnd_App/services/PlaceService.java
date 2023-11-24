@@ -1,5 +1,8 @@
 package Projects.YourPlace_BackEnd_App.services;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -18,9 +21,8 @@ public class PlaceService {
 	}
 
 	// - - - - - - createPlace - - - - - -
-	public Place createPlace() {
-		return null;
-
+	public Place createPlace(Place place) {
+		return placeRepository.save(place);
 	}
 
 	// - - - - - - getPlaces - - - - - -
@@ -30,9 +32,8 @@ public class PlaceService {
 	}
 
 	// - - - - - - findPlace - - - - - -
-	public Place findPlace() {
-		return null;
-
+	public Optional<Place> findPlace(UUID id) {
+		return placeRepository.findById(id);
 	}
 
 	// - - - - - - updatePlace - - - - - -
@@ -42,8 +43,8 @@ public class PlaceService {
 	}
 
 	// - - - - - - deletePlace - - - - - -
-	public void deletePlace() {
-
+	public void deletePlace(UUID id) {
+		placeRepository.deleteById(id);
 	}
 
 }

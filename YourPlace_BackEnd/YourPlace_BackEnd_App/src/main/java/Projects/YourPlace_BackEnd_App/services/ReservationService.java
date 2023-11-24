@@ -1,5 +1,8 @@
 package Projects.YourPlace_BackEnd_App.services;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -18,9 +21,8 @@ public class ReservationService {
 	}
 
 	// - - - - - - createReservation - - - - - -
-	public Reservation createReservation() {
-		return null;
-
+	public Reservation createReservation(Reservation reservation) {
+		return reservationRepository.save(reservation);
 	}
 
 	// - - - - - - getReservations - - - - - -
@@ -30,9 +32,8 @@ public class ReservationService {
 	}
 
 	// - - - - - - findReservation - - - - - -
-	public Reservation findReservation() {
-		return null;
-
+	public Optional<Reservation> findReservation(UUID id) {
+		return reservationRepository.findById(id);
 	}
 
 	// - - - - - - updateReservation - - - - - -
@@ -42,8 +43,8 @@ public class ReservationService {
 	}
 
 	// - - - - - - deleteReservation - - - - - -
-	public void deleteReservation() {
-
+	public void deleteReservation(UUID id) {
+		reservationRepository.deleteById(id);
 	}
 
 }
