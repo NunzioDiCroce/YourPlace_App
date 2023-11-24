@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -32,9 +33,10 @@ public class Reservation {
 	private Date end;
 
 	@ManyToOne
-	@JsonManagedReference // To avoid reference loops during serialization without loosing property
+	@JsonBackReference // To avoid reference loops during serialization without loosing property
 	private User user;
 
 	@OneToMany(mappedBy = "reservation")
+	@JsonManagedReference // To avoid reference loops during serialization without loosing property
 	private List<Place> places;
 }

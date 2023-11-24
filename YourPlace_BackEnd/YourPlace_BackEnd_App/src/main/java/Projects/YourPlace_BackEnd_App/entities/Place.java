@@ -2,6 +2,8 @@ package Projects.YourPlace_BackEnd_App.entities;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import Projects.YourPlace_BackEnd_App.enums.PlaceStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -35,5 +37,6 @@ public class Place {
 	private PlaceStatus placeStatus;
 
 	@ManyToOne
+	@JsonBackReference // To avoid reference loops during serialization without loosing property
 	private Reservation reservation;
 }
