@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import Projects.YourPlace_BackEnd_App.entities.Place;
+import Projects.YourPlace_BackEnd_App.exceptions.NotFoundException;
+import Projects.YourPlace_BackEnd_App.payloads.UpdatePlacePayload;
 import Projects.YourPlace_BackEnd_App.repositories.PlaceRepository;
 
 @Service
@@ -32,19 +34,26 @@ public class PlaceService {
 	}
 
 	// - - - - - - findPlace - - - - - -
-	public Optional<Place> findPlace(UUID id) {
-		return placeRepository.findById(id);
+	public Place findPlace(UUID id) {
+		Optional<Place> place = placeRepository.findById(id);
+		return place.orElseThrow(() -> new NotFoundException("Item with id " + id + " not found."));
 	}
 
 	// - - - - - - updatePlace - - - - - -
-	public Place updatePlace() {
-		return null;
-
+	public Place updatePlace(UUID id, UpdatePlacePayload payload) {
+		Place place = findPlace(id);
+		place.setCity(payload.getCity());
+		place.setAddress(payload.getAddress());
+		place.setBuilding(payload.getBuilding());
+		place.setPlace(payload.getPlace());
+		place.setPlaceStatus(payload.getPlaceStatus());
+		return placeRepository.save(place);
 	}
 
 	// - - - - - - deletePlace - - - - - -
 	public void deletePlace(UUID id) {
-		placeRepository.deleteById(id);
+		Place place = findPlace(id);
+		placeRepository.delete(place);
 	}
 
 }
