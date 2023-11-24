@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -29,7 +30,13 @@ public class Reservation {
 	@GeneratedValue
 	private UUID id;
 
+	@Column(nullable = false)
+	private String description;
+
+	@Column(nullable = false)
 	private Date start;
+
+	@Column(nullable = false)
 	private Date end;
 
 	@ManyToOne

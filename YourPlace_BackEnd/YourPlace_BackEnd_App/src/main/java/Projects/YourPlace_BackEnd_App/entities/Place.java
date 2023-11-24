@@ -5,6 +5,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import Projects.YourPlace_BackEnd_App.enums.PlaceStatus;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,9 +29,16 @@ public class Place {
 	@GeneratedValue
 	private UUID id;
 
+	@Column(nullable = false)
 	private String city;
+
+	@Column(nullable = false)
 	private String address;
+
+	@Column(nullable = false)
 	private int building;
+
+	@Column(nullable = false)
 	private int place;
 
 	@Enumerated(EnumType.STRING)
